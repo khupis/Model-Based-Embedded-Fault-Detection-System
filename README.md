@@ -1,3 +1,3 @@
 # HIL-Inspired Edge Diagnostic Testbed
 
-Simscape Electrical circuit-fault simulation streamed over UDP to a Jetson edge device for real-time DSP filtering, anomaly detection, dashboard visualization, benchmark logging, and optional PDN/KiCad power-integrity validation.
+HIL-inspired edge diagnostic testbed using Simscape, UDP telemetry, Jetson/Python DSP, dashboard anomaly detection, and optional KiCad PDN validation.
