@@ -1,6 +1,6 @@
 # fault_bench_shield
 
-KiCad project plan for a 2-layer Arduino Uno shield that supports the real-hardware fault detection bench.
+KiCad project plan for a 2-layer Arduino Uno shield that supports the planned next-stage hardware for the fault detection bench.
 
 ## Board Goal
 
@@ -8,7 +8,7 @@ Build a compact sensor front-end called `fault_bench_shield` that conditions the
 
 ## Functional Blocks
 
-The shield includes a 1 kΩ / 1 µF RC plant, an MCP6001 op-amp voltage-follower buffer on the A0 sense line, a 5 V relay used as a noise-burst fault injector, a jumper-selectable 3 kΩ resistor for the cutoff-shift fault, four test points, and female headers for the Uno.
+The planned shield includes a 1 kΩ / 1 µF RC plant, an MCP6001 op-amp voltage-follower buffer on the A0 sense line, a 5 V relay used as a noise-burst fault injector, a jumper-selectable 3 kΩ resistor for the cutoff-shift fault, four test points, and female headers for the Uno.
 
 ## Layer Stack
 

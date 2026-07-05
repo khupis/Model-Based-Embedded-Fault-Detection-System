@@ -7,10 +7,10 @@ This glossary defines the main terms used in the real-hardware fault detection b
 | Term | Plain-English Meaning | In This Project |
 | --- | --- | --- |
 | HIL (Hardware-in-the-Loop) | A setup where real hardware interacts with a simulated plant or controller in a feedback loop. | Real HIL uses a physical controller or plant together with a simulation. This repo is not HIL; it is a real-hardware fault detection bench with a digital twin. |
-| digital twin | A model that mirrors a physical asset so the model can be compared against real measurements. | The Simscape circuit model that validates the breadboard bench and fault logic. |
+| digital twin | A model that mirrors a physical asset so the model can be compared against real measurements. | The Simscape circuit model that validates the direct-wired prototype and fault logic. |
 | Model-Based Design | Designing, simulating, and validating a system with models before and during hardware implementation. | Used to develop the circuit, fault logic, and validation flow before board fabrication. |
 | testbed | A controlled setup used to test a method or device. | The physical plant, Arduino, Python pipeline, and dashboard together form the bench. |
-| physical plant | The real circuit being measured or stressed. | The breadboard RC/RLC circuit under test. |
+| physical plant | The real circuit or hardware source being measured or stressed. | The direct-wired analog joystick module feeding the Arduino Uno in the recorded demo. |
 | open loop | A path with no control feedback from the detector back to the plant. | Current bench operation: the Arduino measures the circuit and Python classifies faults without actively controlling the plant. |
 | closed loop | A path where detector output changes the system under test. | Not the current operating mode, though the Stateflow FSM can evolve toward active response logic. |
 
@@ -29,7 +29,7 @@ This glossary defines the main terms used in the real-hardware fault detection b
 
 | Term | Plain-English Meaning | In This Project |
 | --- | --- | --- |
-| PCB | Printed circuit board. | The custom 2-layer KiCad sensor front-end for the Uno shield. |
+| PCB | Printed circuit board. | The planned custom 2-layer KiCad sensor front-end for the Uno shield. |
 | GND pour | A large copper area tied to ground. | Used on the bottom layer to improve return paths and noise behavior. |
 | signal integrity | How cleanly a signal keeps its shape while traveling through a circuit. | Important for the sense line, op-amp buffer, and relay-induced transients. |
 | Gerber | Manufacturing files used by a PCB fab house. | The board is exported as Gerbers for JLCPCB fabrication. |
@@ -48,7 +48,7 @@ This glossary defines the main terms used in the real-hardware fault detection b
 | feature extraction | Turning raw samples into summary values. | Produces values for the fault classifier and diagnostics. |
 | anomaly detection | Finding patterns that do not match the expected healthy signal. | Identifies the injected fault states. |
 | fault label | The class name assigned to a measurement window. | Marks normal, noise-burst, or cutoff-shift behavior. |
-| Stateflow FSM | A finite-state machine modeled in MATLAB Stateflow. | Encodes the bench fault logic and detection states. |
+| Stateflow FSM | A finite-state machine modeled in MATLAB Stateflow. | Encodes the bench fault logic and detection states in the documented model. |
 | digital twin validation | Comparing hardware measurements against the model. | Used to verify that the real circuit matches the simulated reference. |
 
 ## Repository Terms
@@ -60,7 +60,7 @@ This glossary defines the main terms used in the real-hardware fault detection b
 | matlab/ | MATLAB scripts and models. | Contains the digital twin and Stateflow assets. |
 | src/ | Source code folder. | Contains the Python serial receiver and DSP pipeline. |
 | arduino/ | Microcontroller firmware folder. | Contains the Uno sketch that streams CSV telemetry. |
-| kicad/ | PCB design folder. | Contains the shield plan for the sensor front-end. |
+| kicad/ | PCB design folder. | Contains the planned shield design for the sensor front-end. |
 
 ## Project Note
 

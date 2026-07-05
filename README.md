@@ -1,8 +1,13 @@
 # Model-Based Embedded Fault Detection System
 
-<p align="center">
-  <a href="#demo-video">Embedded demo video: YouTube link TBD</a>
-</p>
+## Demo Videos
+
+- Arduino IDE demo: https://youtube.com/shorts/Jpcqe5twYGc?feature=share
+- Python code demo: https://youtube.com/shorts/VAUeTeP_f00?feature=share
+
+## Prototype Note
+
+The initial live prototype demo used direct jumper-wire connections from the analog joystick module to the Arduino Uno rather than a breadboard. The joystick provided a real analog input, and the Arduino sampled the signal on A0 in real time.
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge" alt="Python 3.x">
@@ -11,11 +16,11 @@
   <img src="https://img.shields.io/badge/MathWorks-Certified-0053a0?style=for-the-badge" alt="MathWorks Certified">
 </p>
 
-A real-hardware circuit fault detection bench: an Arduino Uno samples a physical RC/RLC plant at 100 Hz, a Python pipeline filters and classifies three injected fault types in real time, validated against a Simscape digital twin, with fault logic encoded as a Stateflow FSM and a custom 2-layer KiCad sensor front-end.
+A real-hardware fault detection system: the current live prototype uses a direct-wired analog joystick module feeding an Arduino Uno on A0, with Python handling the downstream processing and classification pipeline. The repo also documents the Simscape digital twin, Stateflow fault logic, and the planned KiCad sensor front-end.
 
-## Demo Video
+## Current Prototype
 
-Embedded demo video: YouTube link TBD.
+The recorded demo shows a real analog signal path from the joystick module into the Arduino Uno, sampled live on A0 and streamed into the Python workflow for analysis.
 
 ## Technical Glossary
 
