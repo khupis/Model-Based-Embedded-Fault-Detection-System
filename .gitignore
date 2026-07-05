@@ -1,5 +1,6 @@
 # Python
 __pycache__/
+**/__pycache__/
 *.py[cod]
 *$py.class
 *.so
@@ -46,8 +47,11 @@ profile_default/
 ipython_config.py
 
 .venv/
+.venv*/
 venv/
+venv*/
 env/
+env*/
 ENV/
 env.bak/
 venv.bak/
@@ -140,9 +144,12 @@ results/logs/
 *-backups/
 *.kicad_sch-bak
 *.kicad_pcb-bak
+*.sch-bak
+*-cache.lib
+fp-info-cache
+*.kicad_prl
 *.bak
 *.bck
-fp-info-cache
 
 !*.kicad_pro
 !*.kicad_sch
