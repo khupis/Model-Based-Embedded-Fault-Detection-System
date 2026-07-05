@@ -5,9 +5,19 @@
 - Arduino IDE demo: https://youtube.com/shorts/Jpcqe5twYGc?feature=share
 - Python code demo: https://youtube.com/shorts/VAUeTeP_f00?feature=share
 
-## Prototype Note
+## Current Hardware Prototype
 
-The initial live prototype demo used direct jumper-wire connections from the analog joystick module to the Arduino Uno rather than a breadboard. The joystick provided a real analog input, and the Arduino sampled the signal on A0 in real time.
+The recorded prototype used direct jumper-wire connections from the analog joystick module to the Arduino Uno. The joystick module fed a real analog signal, and the Arduino sampled that signal on A0 in real time.
+
+<p align="center">
+  <img src="images/Arduino1.jpg" alt="Analog joystick module" width="720">
+  <br>
+  <img src="images/Arduino2.jpg" alt="Elegoo Uno top view" width="720">
+  <br>
+  <img src="images/Arduino3.jpg" alt="Power and analog input side" width="720">
+  <br>
+  <img src="images/Arduino4.jpg" alt="Board-side wiring view" width="720">
+</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge" alt="Python 3.x">
@@ -17,10 +27,6 @@ The initial live prototype demo used direct jumper-wire connections from the ana
 </p>
 
 A real-hardware fault detection system: the current live prototype uses a direct-wired analog joystick module feeding an Arduino Uno on A0, with Python handling the downstream processing and classification pipeline. The repo also documents the Simscape digital twin, Stateflow fault logic, and the planned KiCad sensor front-end.
-
-## Current Prototype
-
-The recorded demo shows a real analog signal path from the joystick module into the Arduino Uno, sampled live on A0 and streamed into the Python workflow for analysis.
 
 ## Technical Glossary
 
