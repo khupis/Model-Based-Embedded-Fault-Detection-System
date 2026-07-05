@@ -10,13 +10,13 @@
 The recorded prototype used direct jumper-wire connections from the analog joystick module to the Arduino Uno. The joystick module fed a real analog signal, and the Arduino sampled that signal on A0 in real time.
 
 <p align="center">
-  <img src="images/Arduino1.jpg" alt="Analog joystick module" width="720">
-  <br>
-  <img src="images/Arduino2.jpg" alt="Elegoo Uno top view" width="720">
-  <br>
-  <img src="images/Arduino3.jpg" alt="Power and analog input side" width="720">
-  <br>
-  <img src="images/Arduino4.jpg" alt="Board-side wiring view" width="720">
+  <img src="images/Arduino1.jpg" alt="Analog joystick module connected to the Arduino Uno prototype" width="250">
+  <img src="images/Arduino2.jpg" alt="Top view of the Arduino Uno with direct-wired joystick prototype" width="250">
+</p>
+
+<p align="center">
+  <img src="images/Arduino3.jpg" alt="Arduino Uno power and analog input side with wiring" width="250">
+  <img src="images/Arduino4.jpg" alt="Board-side wiring view of the direct-wired prototype" width="250">
 </p>
 
 <p align="center">
