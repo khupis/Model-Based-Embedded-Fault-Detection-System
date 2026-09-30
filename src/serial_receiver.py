@@ -1,93 +1,62 @@
-from __future__ import annotations
-
+# Reads the Arduino's ms,volts,label lines off USB serial into a rolling buffer.
+import argparse
 import csv
-from collections import deque
-from dataclasses import dataclass
-from typing import Deque, Iterator, Optional
+from collections import deque, namedtuple
 
 import serial
 
-
-@dataclass(frozen=True)
-class SampleRow:
-    timestamp_ms: int
-    voltage: float
-    fault_label: str
+SampleRow = namedtuple("SampleRow", "timestamp_ms voltage fault_label")
 
 
 class SerialReceiver:
-    def __init__(
-        self,
-        port: str,
-        baudrate: int = 115200,
-        window_size: int = 50,
-        timeout: float = 1.0,
-    ) -> None:
+    def __init__(self, port, baudrate=115200, window_size=50, timeout=1.0):
         self.serial = serial.Serial(port=port, baudrate=baudrate, timeout=timeout)
-        self.buffer: Deque[SampleRow] = deque(maxlen=window_size)
-        self.window = self.buffer
+        self.buffer = deque(maxlen=window_size)
 
-    def read_row(self) -> Optional[SampleRow]:
-        raw_line = self.serial.readline().decode("utf-8", errors="replace").strip()
-        if not raw_line:
-            return None
-
+    def read_row(self):
+        line = self.serial.readline().decode("utf-8", errors="replace").strip()
+        # opening the port resets the Uno, so the first line or two are often junk
         try:
-            row = next(csv.reader([raw_line]))
-        except csv.Error:
+            t, v, label = next(csv.reader([line]))[:3]
+            sample = SampleRow(int(t), float(v), label.strip())
+        except (csv.Error, ValueError):
             return None
-
-        if len(row) < 3:
-            return None
-
-        try:
-            sample = SampleRow(
-                timestamp_ms=int(row[0]),
-                voltage=float(row[1]),
-                fault_label=row[2].strip(),
-            )
-        except ValueError:
-            return None
-
         self.buffer.append(sample)
         return sample
 
-    def read_forever(self) -> Iterator[SampleRow]:
+    def read_forever(self):
         while True:
             sample = self.read_row()
             if sample is not None:
                 yield sample
 
-    def latest_window(self) -> tuple[SampleRow, ...]:
+    def latest_window(self):
         return tuple(self.buffer)
 
-    def voltages(self) -> list[float]:
-        return [sample.voltage for sample in self.buffer]
+    def voltages(self):
+        return [s.voltage for s in self.buffer]
 
-    def timestamps_ms(self) -> list[int]:
-        return [sample.timestamp_ms for sample in self.buffer]
+    def timestamps_ms(self):
+        return [s.timestamp_ms for s in self.buffer]
 
-    def labels(self) -> list[str]:
-        return [sample.fault_label for sample in self.buffer]
+    def labels(self):
+        return [s.fault_label for s in self.buffer]
 
-    def close(self) -> None:
+    def close(self):
         self.serial.close()
 
 
 if __name__ == "__main__":
-    import argparse
-
-    parser = argparse.ArgumentParser(description="Read Arduino CSV telemetry over USB serial.")
+    parser = argparse.ArgumentParser()
     parser.add_argument("port")
     parser.add_argument("--baudrate", type=int, default=115200)
     parser.add_argument("--window-size", type=int, default=50)
     args = parser.parse_args()
 
-    receiver = SerialReceiver(args.port, baudrate=args.baudrate, window_size=args.window_size)
+    rx = SerialReceiver(args.port, args.baudrate, args.window_size)
     try:
-        for sample in receiver.read_forever():
-            print(sample)
+        for s in rx.read_forever():
+            print(s)
     except KeyboardInterrupt:
         pass
-    finally:
-        receiver.close()
+    rx.close()
